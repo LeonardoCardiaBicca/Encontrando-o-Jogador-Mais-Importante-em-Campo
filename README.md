@@ -1,1 +1,1 @@
-"Encontrando-o-Jogador-Mais-Importante-em-Campo" 
+Esse diretório contém os arquivos referentes ao trabalho da disciplina de matemática discreta do curso de ciência de dados da Fundação Getulio Vargas
