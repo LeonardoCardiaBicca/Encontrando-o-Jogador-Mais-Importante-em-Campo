@@ -1,1 +1,23 @@
-Esse diretório contém os arquivos referentes ao trabalho da disciplina de matemática discreta do curso de ciência de dados da Fundação Getulio Vargas
+## Análise de Redes de Passes e PageRank (Copa do Mundo 2022)
+Interface interativa de terminal (CLI) em Python para analisar redes de passes de seleções da Copa do Mundo de 2022 utilizando dados abertos da StatsBomb. O algoritmo constrói grafos direcionados de passes e calcula a centralidade PageRank sob diferentes ponderações táticas, gerando tabelas comparativas e visualizações de alta resolução.
+## Funcionalidades
+Seleção interativa via terminal: Escolha qualquer uma das 32 seleções da Copa do Mundo de 2022 e decida entre analisar a campanha completa ou uma partida específica. Três modelos de PageRank:Básico: ponderado pela contagem simples de passes. Expected Threat ($xT$): ponderado pelo ganho posicional ($\Delta xT$) na grade $8 \times 12$ de Karun Singh. Expected Goals ($xG$) híbrido: calibrado empiricamente com assistências diretas para chute ($xA$) e $xG$ futuro gerado na mesma posse de bola. Métricas de estabilidade: Cálculo automático da correlação de Spearman e mudanças de posição no ranking entre os modelos.Exportação automática: Salva tabelas em .csv e gráficos (Rede de Passes, Barras Agrupadas e Mapa de Calor $xT$) em .png e .pdf. 
+## Pré-requisitos:
+Python 3.8 ou superior (ou distribuição Anaconda / Miniconda). Conexão com a internet (necessária na primeira execução de cada partida para baixar os eventos da API aberta da StatsBomb). 
+## Instalação das DependênciasAntes de rodar o algoritmo pela primeira vez:
+instale as bibliotecas necessárias.
+Abra o terminal (no Windows, recomenda-se usar o Anaconda Prompt caso utilize Anaconda) e execute: 
+*pip install numpy pandas networkx scipy matplotlib statsbombpy*
+Biblioteca opcional (recomendada) Para renderização otimizada do gramado de futebol, você também pode instalar o mplsoccer (caso não esteja instalado, o código utiliza automaticamente um desenho vetorial equivalente): *pip install mplsoccer*
+Dica: Se o comando pip não for reconhecido no seu terminal, tente usar:python -m pip install numpy pandas networkx scipy matplotlib statsbombpy
+Como Executar: 
+Baixe ou clone o arquivo analise_pagerank.py para uma pasta no seu computador (por exemplo, Desktop/Interface). Abra o terminal:Windows (com Anaconda): Abra o Menu Iniciar e procure por Anaconda Prompt.Windows (Python padrão): Abra o Prompt de Comando (cmd) ou PowerShell.Linux / macOS: Abra o Terminal padrão.Navegue até a pasta onde o arquivo está salvo:cd "caminho/para/a/pasta"
+Exemplo no Windows:cd "C:\Users\SeuUsuario\Desktop\Interface"
+Execute o script:python analise_pagerank.py
+(No Windows, caso python não funcione no cmd comum, tente py analise_pagerank.py.)Como Usar a InterfaceAo iniciar o programa, siga as instruções exibidas no terminal:Escolha a seleção: Digite o número correspondente à seleção desejada e pressione Enter.Escolha o escopo da análise:Digite 0 para analisar todos os jogos (Campanha Completa). Digite o número de uma partida específica para analisar apenas aquele jogo.Geração de gráficos: Informe s (sim) ou n (não) para gerar e salvar as figuras em PDF e PNG.Modelo da rede (apenas para jogo único com gráficos): Escolha qual peso será usado nas arestas da rede de passes (xT, xG híbrido, Peso Tático ou Básico). Finalizar ou continuar: Ao término, você pode digitar s para fazer uma nova análise ou n (ou q nos menus) para encerrar o programa. Arquivos GeradosO algoritmo cria automaticamente duas pastas no mesmo diretório do script:resultados/ — Tabelas exportadas em formato .csv:ranking_medio_<selecao>.csv: Ranking médio consolidado nos 3 modelos (campanha completa). comparacao_partidas_<selecao>.csv: Estabilidade e correlação de Spearman jogo a jogo.ranking_<selecao>_vs_<adversario>.csv: Ranking de uma partida específica.figuras/ — Gráficos em alta resolução (300 DPI) nos formatos .png e .pdf:barras_<selecao>.*: Gráfico de barras agrupadas comparando os 3 modelos (campanha completa).rede_<selecao>_vs_<adversario>.*: Rede direcionada de passes sobre o campo StatsBomb (jogo único).heatmap_xt_<selecao>_vs_<adversario>.*: Mapa de calor $xT$ com os 15 passes de maior $\Delta xT$ (jogo único).
+## Solução de Problemas Comuns
+Python was not found no Windows:
+Isso ocorre quando o Python não está adicionado ao PATH do sistema. Utilize o Anaconda Prompt (se você instalou o Anaconda) ou tente executar o script com py analise_pagerank.py.Aviso de statsbombpy não encontrada:
+O próprio programa exibirá o comando de instalação no terminal. Rode pip install statsbombpy no mesmo terminal em que você executa o script e tente novamente.
+## Demora na primeira execução:
+A primeira análise de uma partida faz o download dos eventos pela internet. Nas análises seguintes dentro da mesma sessão, o algoritmo usa cache em memória para responder quase instantaneamente.
